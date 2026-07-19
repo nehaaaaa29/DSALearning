@@ -19,10 +19,12 @@ public Node(int data){
 }
 public static Node head;
 public static Node tail;
+public static int size;
 
 public void AddFirst(int data){
     //step1 create new node
       Node newnode= new Node( data);
+      size++;
       //agar head null hai that means koi node hi nhi hai toh newnode ko hi head aur tail bana denge
     if(head==null){
        head=tail=newnode;
@@ -37,6 +39,7 @@ public void AddFirst(int data){
 public void AddLast(int data){
   //step 1 create new node
   Node newnode= new Node(data);
+  size++;
   //agar list khali hui toh
   if(head==null){
     head=tail=newnode;
@@ -58,7 +61,42 @@ public  void   print(){
   System.out.print("NULL");
   System.out.println();
 }
+public void addIndex(int idx,int data){
+  if(idx==0){
+    AddFirst(data);
+    return;
+  }
+   
+  
+  Node newnode=new Node(data);
+  size++;
+  Node temp=head;
+  int i=0;
+   while(i<idx-1){
+   temp=temp.next;
+    i++;
 
+  }
+ newnode.next=temp.next;
+    temp.next=newnode;
+
+
+}
+public int removeFirst(){
+  if(size==0){
+    System.out.println("LL is empty");
+    return Integer.MIN_VALUE;
+  }else if(size==1){
+    int val=head.data;
+    head=tail=null;
+    size=0;
+    return val;
+  }
+  int val=head.data;
+  head=head.next;
+  size--;
+  return val;
+}
 
 public static void main(String[] args) {
 
@@ -71,7 +109,12 @@ LinkedList ll=new LinkedList();
        ll.AddFirst(1);
        ll.AddLast(6);
        ll.AddLast(7);
+       ll.addIndex(3, 33);
     ll. print();
+     System.out.println(ll.size);
+    ll.removeFirst();
+    ll.print();
+    System.out.println(ll.size);
            
 }
 
