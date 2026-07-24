@@ -211,33 +211,70 @@ public void deleteNode(int n){
 }
 
 
+public static boolean iscycle(){
+  Node slow=head;
+  Node fast=head;
+  while(fast!=null && fast.next !=null){
+    slow=slow.next;
+    fast=fast.next.next;
+    if(slow==fast){
+     return  true;
+    }
+
+  }
+
+  return false;
+  
+}
+
+public static void removecycle(){
+ Node slow=head;
+  Node fast=head;
+  boolean cycle=false;
+  while(fast!=null && fast.next !=null){
+    slow=slow.next;
+    fast=fast.next.next;
+    if(fast==slow){
+     cycle=true;
+     break;
+    }
+
+  }
+  if(cycle==false){
+    return;
+  }
+
+  slow=head;
+  Node prev=null;
+  while(slow !=fast){
+      prev=fast;
+      slow=slow.next;
+      fast=fast.next;
+  }
+
+
+  prev.next=null;
+
+
+
+ 
+ 
+
+}
+
 
 
 public static void main(String[] args) {
 
 LinkedList ll=new LinkedList();
 
-   ll.AddFirst(5);
-    ll.AddFirst(4);
-     ll.AddFirst(3);
-      ll.AddFirst(2);
-       ll.AddFirst(1);
-       ll.AddLast(6);
-       ll.AddLast(7);
-       ll.addIndex(3, 33);
-    ll. print();
-     System.out.println(ll.size);
-    ll.removeFirst();
-    ll.print();
-    System.out.println(ll.size);
-    ll.removeLast();
-    ll.print();
-    System.out.println(ll.search(3));
-    System.out.println(ll.recSearch(6));
+head=new Node(1);
+head.next=new Node(2);
+head.next.next=new Node(3);
+head.next.next.next=head;
+System.out.println(iscycle());
 
-
-    ll.deleteNode(4);
-    ll.print();
+  
            
 }
 
