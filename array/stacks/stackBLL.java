@@ -1,4 +1,3 @@
-import java.util.Stack;
 
 public class stackBLL {
 
@@ -18,7 +17,35 @@ static class Stack{
     }
 
     public static void push(int data){
-        
+      Node newNode=new Node(data);  
+    if(isEmpty()){
+         head=newNode;
+         return;
+    }    
+    newNode.next=head;
+    head=newNode;
+    }
+
+    //pop
+    public static int pop(){
+         if(isEmpty()){
+         
+         return -1;
+    }    
+    int top=head.data;
+    head=head.next;
+  
+    
+ return top;
+
+    }
+    public static int peek(){
+         if(isEmpty()){
+         
+         return -1;
+    }    
+    return head.data;
+
     }
 
 }
