@@ -46,6 +46,39 @@ public class HeightBt {
       int treesum=leftsum+rightsum+root.data;
       return treesum;
     }
+    public static int diameter2(Node root){
+        if(root==null){
+            return 0;
+        }
+       int leftdiam=diameter2(root.left);
+       int rightdiam=diameter2(root.right);
+      int leftheight=height(root.left);
+      int rightheight=height(root.right);
+      int selfdiam=leftheight+rightheight+1;
+     return Math.max(selfdiam,Math.max(leftdiam,rightdiam));
+
+    }
+    static class info{
+        int diam;
+        int ht;
+        public info(int diam,int ht){
+            this.diam=diam;
+            this.ht=ht;
+        }
+    }
+
+    public static info diameter(Node root){
+        if(root==null){
+            return new info(0,0);
+        }
+
+        info leftinfo=diameter(root.left);
+        info rightinfo=diameter(root.right);
+
+        int diam=Math.max(Math.max(leftinfo.diam , rightinfo.diam) , leftinfo.ht+ rightinfo.ht+1);
+        int ht=Math.max(leftinfo.ht,rightinfo.ht)+1;
+        return new info (diam,ht);
+    }
     public static void main(String[] args) {
         Node root=new Node(1);
         root.left=new Node(2);
@@ -58,6 +91,9 @@ public class HeightBt {
         System.out.println(res);
         System.out.println(count(root));
         System.out.println(sum(root));
-        
+        System.out.println(diameter2(root));
+
+        System.out.println(diameter(root).diam);
+        System.out.println(diameter(root).ht);
     }
 }
